@@ -25,7 +25,7 @@ class PostsController extends Controller
         $title = $request->title;
         $content = $request->content;
         $request -> validate([
-            'title' => 'required|min:3',
+            'title' => 'required|min:4',
             'content' => 'required'
         ]);
 
