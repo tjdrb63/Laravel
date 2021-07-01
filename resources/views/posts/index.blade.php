@@ -27,7 +27,9 @@
                 </div>
             @endforeach
         </ul>
-        {{ $posts ->appends(['sort' => 'votes']) -> links() }}
+        <div style="height:100px">
+            {{$posts->links("pagination::bootstrap-4")}}
+        </div>
     </div>
 </body>
 </html>
