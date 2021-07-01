@@ -12,6 +12,7 @@ class PostsController extends Controller
 
     public function index(){
         $posts = Post::latest()->paginate(5);
+        //$posts -> withPath('posts/index');
         return view('posts.index',['posts'=>$posts]);
      //   return $posts;
     }
@@ -35,7 +36,6 @@ class PostsController extends Controller
         // $post -> user_id = Auth::user()->id;
         $post -> user_id = 1;
         $post -> save();
-
         // return view('./index');
 
         $post->save();

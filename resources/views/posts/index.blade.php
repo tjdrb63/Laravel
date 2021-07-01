@@ -18,15 +18,16 @@
             {{-- posts 컬렉션 --}}
             <a href="/posts/create">게시글 작성</a>
             @foreach ($posts as $post)
-                <li class="list-group-item">Cras justo odio</li>
+                <div class="list-group-item">
                     <span>Title : {{ $post -> title}}</span>
-                    <div>
-                        {{ $post -> content }}
+                    <div >
+                         {{ $post -> content }}
                     </div>
                     <span> written on {{$post -> created_at }}</span>
-                    <hr>
+                </div>
             @endforeach
         </ul>
+        {{ $posts ->appends(['sort' => 'votes']) -> links() }}
     </div>
 </body>
 </html>

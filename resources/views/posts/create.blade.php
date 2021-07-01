@@ -20,16 +20,19 @@
             @csrf
             <div class="form-group">
                 <label for="exampleInputEmail1">제목</label>
-                <input type="text" class="form-control" name="title" placeholder="제목 입력">
+                <input type="text" class="form-control" name="title" placeholder="제목 입력" value={{ old('title') }}>
                 {{ $errors -> first('title') }}
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">게시글 내용</label>
-                <textarea name="content" class="form-control" cols="30" rows="10"></textarea>
+                <textarea name="content" class="form-control" cols="30" rows="10" >{{ old('content') }}</textarea>
                 {{ $errors -> first('content') }}
             </div>
                 <button type="submit" class="btn btn-primary">확인</button>
         </form>
+
+
+
     </div>
 </body>
 </html>
