@@ -9,7 +9,16 @@ use Illuminate\Support\Facades\Auth;
 class PostsController extends Controller
 {
     // create , store , edit , update , destroy , show , index
+    public function __construct()
+    {
+        $this -> middleware(['auth'])->except(['index','show']); // this 안의 모든 라우터는 middleware 적용시킴
 
+    }
+    public function show(Request $request,$id){
+        $post = Post::find($id);
+        $currentPage = $request -> page;
+        return view('posts.show',compact('post','currentPage'));
+    }
     public function index(){
         $posts = Post::latest()->paginate(5);
         //$posts -> withPath('posts/index');
@@ -33,8 +42,7 @@ class PostsController extends Controller
         $post = new Post();
         $post -> title = $title;
         $post -> content = $content;
-        // $post -> user_id = Auth::user()->id;
-        $post -> user_id = 1;
+        $post -> user_id = Auth::user()->id;
         $post -> save();
         // return view('./index');
 
