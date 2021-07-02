@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
+use Doctrine\DBAL\Driver\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,7 @@ require __DIR__.'/auth.php';
 
 
 Route::get('/', function () {return view('main');});
-Route::get('/posts/create',[PostsController::class,'create']);
-Route::post('/posts/store',[PostsController::class,'store']);
-Route::get('/posts/index',[PostsController::class,'index']);
+Route::get('/posts/create',[PostsController::class,'create'])->name('posts.create');
+Route::post('/posts/store',[PostsController::class,'store'])->name('posts.store');
+Route::get('/posts/index',[PostsController::class,'index'])->name('posts.index');
+Route::get('/posts/show/{id}', [PostsController::class,'show'])->name('post.show');
