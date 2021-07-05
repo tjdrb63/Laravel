@@ -16,7 +16,7 @@
 
     <h1>게시판 입력</h1>
     <div class="container">
-        <form action='./store' method="POST">
+        <form action='./store' method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="exampleInputEmail1">제목</label>
@@ -27,6 +27,13 @@
                 <label for="exampleInputPassword1">게시글 내용</label>
                 <textarea name="content" class="form-control" cols="30" rows="10" >{{ old('content') }}</textarea>
                 {{ $errors -> first('content') }}
+            </div>
+            <div class="form-group">
+                <label for="file">File</label>
+                <input name="imageFile" id="file", type="file">
+                @error('imgfile')
+                    <div>{{ $message }}</div>
+                @enderror
             </div>
                 <button type="submit" class="btn btn-primary">확인</button>
         </form>

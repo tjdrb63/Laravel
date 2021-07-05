@@ -26,8 +26,9 @@
                         <a href="{{
                                     route('post.show',
                                         ['id' => $post -> id,
-                                         'page' => $posts->currentPage()]
+                                         'page' => $posts->currentPage()] // 현재 페이지
                                 )}}">
+                                {{-- "post/show".{{ $post->id }},"?page=".{{ $post->currentPage() }} --}}
 
                             Title : {{ $post -> title}}
                         </a>

@@ -23,6 +23,13 @@
                 <textarea readonly name="content" class="form-control" cols="30" rows="10" >{{ $post -> content }}</textarea>
                 {{ $errors -> first('content') }}
             </div>
+            <div class="fomr-group">
+                <label for="imageFile">Post Image</label>
+                <div class="w-10">
+                    {{-- <img class="img-thumbnail"width="25%" src="/storage/images/{{$post -> image ?? 'no_image.jpg'}}"> --}}
+                    <img class="img-thumbnail" width="25%" src="{{$post -> imagePath()}}">
+                </div>
+            </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">등록일</label>
                 <input type="text" readonly class="form-control" name="title" placeholder="제목 입력" value="{{$post -> created_at}}">
@@ -31,10 +38,10 @@
                 <label for="exampleInputEmail1">지난시간</label>
                 <input type="text" readonly class="form-control" name="title" placeholder="제목 입력" value="{{$post -> created_at->diffForHumans()}}">
             </div>
-
+             {{--이전 페이지 인덱스로 가기 --}}
             <button  class="btn btn-primary" onclick="location.href = '{{ route('posts.index',['page' => $currentPage])}}'">확인</button>
-        </form>
 
+        </form>
 
 
     </div>
