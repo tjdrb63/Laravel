@@ -13,34 +13,48 @@
 </head>
 <body>
 
+
     <div class="container">
+        <div class="display-1">
+            <h1>게시판 보기</h1>
+        </div>
             <div class="form-group">
-                <label for="exampleInputEmail1">제목</label>
+                <label class="badge badge-secondary">제목</label>
                 <input type="text" readonly class="form-control" name="title" placeholder="제목 입력" value="{{$post -> title}}">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">게시글 내용</label>
+                <label class="badge badge-secondary">게시글 내용</label>
                 <textarea readonly name="content" class="form-control" cols="30" rows="10" >{{ $post -> content }}</textarea>
                 {{ $errors -> first('content') }}
             </div>
             <div class="fomr-group">
-                <label for="imageFile">Post Image</label>
+                <label class="badge badge-secondary">이미지 사진</label>
                 <div class="w-10">
                     {{-- <img class="img-thumbnail"width="25%" src="/storage/images/{{$post -> image ?? 'no_image.jpg'}}"> --}}
                     <img class="img-thumbnail" width="25%" src="{{$post -> imagePath()}}">
                 </div>
             </div>
             <div class="form-group">
-                <label for="exampleInputEmail1">등록일</label>
-                <input type="text" readonly class="form-control" name="title" placeholder="제목 입력" value="{{$post -> created_at}}">
+                <label class="badge badge-secondary">등록일</label>
+                <input type="text" readonly class="form-control" name="title" value="{{$post -> created_at}}">
             </div>
             <div class="form-group">
-                <label for="exampleInputEmail1">지난시간</label>
-                <input type="text" readonly class="form-control" name="title" placeholder="제목 입력" value="{{$post -> created_at->diffForHumans()}}">
+                <label class="badge badge-secondary">지난시간</label>
+                <input type="text" readonly class="form-control" name="title"  value="{{$post -> created_at->diffForHumans()}}">
+            </div>
+            <div class="form-group">
+                <label class="badge badge-secondary">작성자</label>
+                <input type="text" readonly class="form-control" name="title" value="{{$post -> user_id}}">
             </div>
              {{--이전 페이지 인덱스로 가기 --}}
-            <button  class="btn btn-primary" onclick="location.href = '{{ route('posts.index',['page' => $currentPage])}}'">확인</button>
-
+            <div class="flex">
+                <button  class="btn btn-primary"
+                    onclick="location.href = '{{ route('posts.index',['page' => $currentPage])}}'">확인</button>
+                <button  class="btn btn-primary"
+                    onclick="location.href = '{{ route('post.edit',['id' => $post -> id])}}'">수정</button>
+                <button  class="btn btn-danger"
+                    onclick="location.href = '{{ route('post.delete',['id' => $post -> id])}}'">삭제</button>
+            </div>
         </form>
 
 

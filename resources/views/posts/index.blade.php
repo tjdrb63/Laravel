@@ -13,30 +13,30 @@
 
 <body>
     <div class="container">
-        <a href="{{  route('dashboard') }}">DashBoard</a>
+        <a href="{{  route('dashboard') }}">대쉬보드로 이동</a>
         <h1>게시글 리스트</h1>
         <ul class="list-group">
             {{-- posts 컬렉션 --}}
             @auth
-            <a href="/posts/create">게시글 작성</a>
+            <button  class="btn btn-primary" onclick="location.href = '{{ route('posts.create')}}'">게시글 작성</button>
+
             @endauth
             @foreach ($posts as $post)
                 <div class="list-group-item">
                     <span>
-                        <a href="{{
-                                    route('post.show',
-                                        ['id' => $post -> id,
-                                         'page' => $posts->currentPage()] // 현재 페이지
-                                )}}">
+                       <div class="badge badge-secondary"> 제목 </div><a href="{{
+                                        route('post.show',
+                                         ['id' => $post -> id,
+                                          'page' => $posts->currentPage()] // 현재 페이지
+                                    )}}">
                                 {{-- "post/show".{{ $post->id }},"?page=".{{ $post->currentPage() }} --}}
-
-                            Title : {{ $post -> title}}
+                             {{ $post -> title}}
                         </a>
                     </span>
                     <div>
-                         {{ $post -> content }}
+                    <div class="badge badge-secondary">내용</div>  {{ $post -> content }}
                     </div>
-                    <span> written on {{$post -> created_at }}</span>
+                    <br><div style="text-align: right"><span class="badge badge-secondary">작성일자</span> {{$post -> created_at -> diffForHumans()}}</div>
                 </div>
             @endforeach
         </ul>
