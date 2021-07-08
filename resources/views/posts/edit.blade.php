@@ -16,7 +16,7 @@
 
     <div class="container">
         <h1>게시판 입력</h1>
-        <form action='{{ Route('post.update',['id' => $post -> id]) }}' method="POST" enctype="multipart/form-data">
+        <form action='{{ Route('post.update',['id' => $post -> id,'page' => $page]) }}' method="POST" enctype="multipart/form-data">
             @csrf
             @method("put")
 

@@ -14,9 +14,10 @@
 <body>
 
 
+
     <div class="container">
         <div class="display-1">
-            <h1>게시판 보기</h1>
+            <p class="breadcrump bg-primary text-white p-2 rounded h1">게시판 보기</p>
         </div>
             <div class="form-group">
                 <label class="badge badge-secondary">제목</label>
@@ -47,13 +48,20 @@
                 <input type="text" readonly class="form-control" name="title" value="{{$post -> user_id}}">
             </div>
              {{--이전 페이지 인덱스로 가기 --}}
-            <div class="flex">
+
+            <div class="flex mb-5">
                 <button  class="btn btn-primary"
                     onclick="location.href = '{{ route('posts.index',['page' => $currentPage])}}'">확인</button>
-                <button  class="btn btn-primary"
-                    onclick="location.href = '{{ route('post.edit',['id' => $post -> id])}}'">수정</button>
-                <button  class="btn btn-danger"
-                    onclick="location.href = '{{ route('post.delete',['id' => $post -> id])}}'">삭제</button>
+                    @can('update',$post)
+
+                        <button  class="btn btn-primary"
+                            onclick="location.href = '{{ route('post.edit',['id' => $post -> id,'page'=>$currentPage])}}'">수정</button>
+                        <form action={{ route('post.delete',['id' => $post -> id , 'page' => $currentPage]) }} method="Post">
+                            @csrf
+                            @method("delete")
+                            <button  class="btn btn-danger" type="submit">삭제</button>
+                        </form>
+                    @endcan
             </div>
         </form>
 

@@ -17,11 +17,10 @@ class PostsController extends Controller
 
     }
 
-    public function edit($id){
+    public function edit(Request $request,$id){
         //수정 폼 생성
-
         $post = Post::find($id);
-        return view('posts.edit')->with('post',$post);
+        return view('posts.edit',['post' => $post ,'page' => $request -> page]);
     }
 
     public function update(Request $request, $id){
@@ -34,6 +33,9 @@ class PostsController extends Controller
         ]);
         $post = Post::findOrFail($id);
 
+        if($request->user()->cannot('update',$post)){
+            abort(403);
+        }
 
         if($request -> file('imageFile')){
             $imagePath = 'public/images/'.$post -> image;
@@ -45,12 +47,25 @@ class PostsController extends Controller
         $post -> content = $request -> content;
         $post -> save();
 
-        return redirect()->route('post.show',['id'=>$id]);
+        return redirect()->route('post.show',['id' => $id,'page'=> $request->page]);
     }
 
-    public function destroy($id){
+    public function destroy(Request $request){
         //파일 시스템에서 이미지 삭제
         //게시판 삭제
+        $post = Post::findOrFail($request -> id);
+
+        if($request->user()->cannot('delete',$post)){
+            abort(403);
+        }
+
+        if($post -> image){
+            $imagePath = 'public/images/'.$post->image;
+            Storage::delete($imagePath);
+        }
+        $post -> delete();
+        return redirect()->route('posts.index',['page' => $request -> page]);
+
     }
 
     public function show(Request $request,$id){

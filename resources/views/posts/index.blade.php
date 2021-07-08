@@ -13,9 +13,26 @@
 
 <body>
     <div class="container">
-        <a href="{{  route('dashboard') }}">대쉬보드로 이동</a>
-        <h1>게시글 리스트</h1>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary mb-4 rounded">
+            <a class="navbar-brand" href={{ route('posts.index') }}>HOME</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                  <a class="btn btn-primary btn-lg btn-block" href="{{ route('dashboard') }}">DashBoard <span class="sr-only">(current)</span></a>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                <button class="btn btn-light" type="submit">Search</button>
+              </form>
+            </div>
+          </nav>
         <ul class="list-group">
+
             {{-- posts 컬렉션 --}}
             @auth
             <button  class="btn btn-primary" onclick="location.href = '{{ route('posts.create')}}'">게시글 작성</button>
@@ -24,11 +41,12 @@
             @foreach ($posts as $post)
                 <div class="list-group-item">
                     <span>
-                       <div class="badge badge-secondary"> 제목 </div><a href="{{
-                                        route('post.show',
-                                         ['id' => $post -> id,
-                                          'page' => $posts->currentPage()] // 현재 페이지
+                       <div class="badge badge-secondary mb-2 "> 제목 </div>
+                         <a href="{{route('post.show',
+                                    ['id' => $post -> id,
+                                     'page' => $posts->currentPage()] // 현재 페이지
                                     )}}">
+
                                 {{-- "post/show".{{ $post->id }},"?page=".{{ $post->currentPage() }} --}}
                              {{ $post -> title}}
                         </a>
