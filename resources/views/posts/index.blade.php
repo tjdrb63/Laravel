@@ -13,7 +13,6 @@
 
 <body>
     <div class="container">
-
         <nav class="navbar navbar-expand-lg navbar-light bg-primary mb-4 rounded">
             <a class="navbar-brand" href={{ route('posts.index') }}>HOME</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,6 +23,9 @@
                 <li class="nav-item active">
                   <a class="btn btn-primary btn-lg btn-block" href="{{ route('dashboard') }}">DashBoard <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item active">
+                    <a class="btn btn-primary btn-lg btn-block" href="{{ route('posts.myindex') }}">내가 쓴글 <span class="sr-only">(current)</span></a>
+                  </li>
               </ul>
               <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search">
@@ -42,20 +44,19 @@
                 <div class="list-group-item">
                     <span>
                        <div class="badge badge-secondary mb-2 "> 제목 </div>
-                         <a href="{{route('post.show',
-                                    ['id' => $post -> id,
-                                     'page' => $posts->currentPage()] // 현재 페이지
-                                    )}}">
-
-                                {{-- "post/show".{{ $post->id }},"?page=".{{ $post->currentPage() }} --}}
+                         <a href="{{route('post.show',['id' => $post -> id,'page' => $posts->currentPage()])}}">
                              {{ $post -> title}}
                         </a>
                     </span>
-                    <div>
-                    <div class="badge badge-secondary">내용</div>  {{ $post -> content }}
-                    </div>
-                    <br><div style="text-align: right"><span class="badge badge-secondary">작성일자</span> {{$post -> created_at -> diffForHumans()}}</div>
+                <div>
+                    <div class="badge badge-secondary mb-2 mr-1" style="float: left">내용</div>
+                    <div style="float: left">{!! $post -> content !!}</div>
                 </div>
+                <br>
+                <div style="text-align: right"><span class="badge badge-secondary">작성일자</span> {{$post -> created_at -> diffForHumans()}}</div>
+                <div style="text-align: right"><span class="badge badge-secondary mr-1">작성자</span>{{ $post-> user -> name }}</div>
+
+            </div>
             @endforeach
         </ul>
         <div style="height:100px">

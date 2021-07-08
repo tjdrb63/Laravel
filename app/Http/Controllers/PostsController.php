@@ -76,9 +76,14 @@ class PostsController extends Controller
     public function index(){
         $posts = Post::latest()->paginate(5);
         //$posts -> withPath('posts/index');
-        return view('posts.index',['posts'=>$posts]);
+        return view('posts.index',compact('posts'));
      //   return $posts;
     }
+    public function myindex(){
+        $posts = Auth()->user()->posts()->latest()->paginate(5);
+        return view('posts.index',compact('posts'));
+    }
+
     public function create(){
         return view('posts.create');
     }

@@ -23,10 +23,10 @@
                 <label class="badge badge-secondary">제목</label>
                 <input type="text" readonly class="form-control" name="title" placeholder="제목 입력" value="{{$post -> title}}">
             </div>
-            <div class="form-group">
+            <div class="form-group" >
                 <label class="badge badge-secondary">게시글 내용</label>
-                <textarea readonly name="content" class="form-control" cols="30" rows="10" >{{ $post -> content }}</textarea>
-                {{ $errors -> first('content') }}
+                <div name ="content" class="form-control" style="height: auto" readonly ><p>{!! $post -> content !!}</p></div>
+            {{ $errors -> first('content') }}
             </div>
             <div class="fomr-group">
                 <label class="badge badge-secondary">이미지 사진</label>
@@ -45,7 +45,7 @@
             </div>
             <div class="form-group">
                 <label class="badge badge-secondary">작성자</label>
-                <input type="text" readonly class="form-control" name="title" value="{{$post -> user_id}}">
+                <input type="text" readonly class="form-control" name="title" value="{{$post -> user -> name}}">
             </div>
              {{--이전 페이지 인덱스로 가기 --}}
 
@@ -55,7 +55,7 @@
                     @can('update',$post)
 
                         <button  class="btn btn-primary"
-                            onclick="location.href = '{{ route('post.edit',['id' => $post -> id,'page'=>$currentPage])}}'">수정</button>
+                            onclick="location.href = '{{ route('post.edit',['id' => $post -> id,'page' => $currentPage])}}'">수정</button>
                         <form action={{ route('post.delete',['id' => $post -> id , 'page' => $currentPage]) }} method="Post">
                             @csrf
                             @method("delete")
