@@ -27,8 +27,9 @@
                     <a class="btn btn-primary btn-lg btn-block" href="{{ route('posts.myindex') }}">내가 쓴글 <span class="sr-only">(current)</span></a>
                   </li>
               </ul>
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search">
+
+              <form class="form-inline my-2 my-lg-0"  action={{ Route('posts.search') }}>
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search">
                 <button class="btn btn-light" type="submit">Search</button>
               </form>
             </div>
@@ -53,9 +54,11 @@
                     <div style="float: left">{!! $post -> content !!}</div>
                 </div>
                 <br>
-                <div style="text-align: right"><span class="badge badge-secondary">작성일자</span> {{$post -> created_at -> diffForHumans()}}</div>
-                <div style="text-align: right"><span class="badge badge-secondary mr-1">작성자</span>{{ $post-> user -> name }}</div>
-
+                <div style="text-align: right " class="">
+                    <span class="badge badge-secondary">작성일자</span> {{$post -> created_at -> diffForHumans()}}<br>
+                    <span class="badge badge-secondary mr-1">작성자</span>{{ $post-> user -> name }}<br>
+                    <span class="badge badge-secondary mr-1">조회수</span>{{ $post-> count }}
+                </div>
             </div>
             @endforeach
         </ul>

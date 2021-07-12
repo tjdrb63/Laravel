@@ -67,9 +67,19 @@ class PostsController extends Controller
         return redirect()->route('posts.index',['page' => $request -> page]);
 
     }
+    public function search(Request $request){
+        //dd($request);
+        $search = $request->search;
+        $posts= Post::where('title','like','%'.$search.'%')->orWhere('content','like','%'.$search.'%')->latest()->paginate(5)->withQueryString();
+        $posts -> appends(['search' => $search]);
+        return view('posts.index',compact('posts'));
 
+    }
     public function show(Request $request,$id){
+
         $post = Post::find($id);
+        $post->count++;
+        $post -> save();
         $currentPage = $request -> page;
         return view('posts.show',compact('post','currentPage'));
     }
