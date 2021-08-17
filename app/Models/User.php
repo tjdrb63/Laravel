@@ -15,6 +15,10 @@ class User extends Authenticatable
     public function posts(){
         return $this -> hasMany(Post::class);
     }
+    public function viewed_posts(){
+        return $this->belongsToMany(Post::class);//알아서 'post_user'
+        //   return  $this->belongsToMany(Post::class,'post_user','user_id',post_id','id','id','users');
+    }
 
     /**
      * The attributes that are mass assignable.

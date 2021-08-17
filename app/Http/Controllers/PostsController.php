@@ -73,12 +73,12 @@ class PostsController extends Controller
         $posts= Post::where('title','like','%'.$search.'%')->orWhere('content','like','%'.$search.'%')->latest()->paginate(5)->withQueryString();
         $posts -> appends(['search' => $search]);
         return view('posts.index',compact('posts'));
-
     }
     public function show(Request $request,$id){
-
         $post = Post::find($id);
-        $post->count++;
+        // if(!$post->viewers()->contains(Auth::user())){
+        //     $post->viewers()->attach(Auth::user()->id);
+        // }
         $post -> save();
         $currentPage = $request -> page;
         return view('posts.show',compact('post','currentPage'));

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ChartController;
+use App\Http\Controllers\ChatsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use Doctrine\DBAL\Driver\Middleware;
@@ -26,7 +28,7 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 
-Route::get('/', function () {return view('main');});
+Route::get('/',[PostsController::class,'index']);
 Route::get('/posts/create',[PostsController::class,'create'])->name('posts.create');
 Route::get('/posts/search',[PostsController::class,'search'])->name('posts.search');
 Route::get('/posts/index',[PostsController::class,'index'])->name('posts.index');
@@ -35,5 +37,6 @@ Route::get('/posts/myindex',[PostsController::class,'myindex'])->name('posts.myi
 Route::get('/posts/{id}',[PostsController::class,'edit'])->name('post.edit');
 Route::put('/posts/{id}',[PostsController::class,'update'])->name('post.update');
 Route::delete('/posts/{id}',[PostsController::class,'destroy'])->name('post.delete');
+Route::post('/posts/chats',[ChatsController::class,'store'])->name('chat.store');
 Route::post('/posts/store',[PostsController::class,'store'])->name('posts.store');
-
+Route::get('/chart/index',[ChartController::class,'index'])->name('chart.index');
