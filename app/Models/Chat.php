@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class chat extends Model
 {
+    //protected $table = 'Chats';
     use HasFactory;
 }

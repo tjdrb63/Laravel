@@ -49,6 +49,9 @@ class PostsController extends Controller
 
         return redirect()->route('post.show',['id' => $id,'page'=> $request->page]);
     }
+    // public function chatstore(Request $request){
+    //     return route('chat.store2',compact('request'));
+    // }
 
     public function destroy(Request $request){
         //파일 시스템에서 이미지 삭제
@@ -81,6 +84,7 @@ class PostsController extends Controller
         // }
         $post -> save();
         $currentPage = $request -> page;
+
         return view('posts.show',compact('post','currentPage'));
     }
     public function index(){

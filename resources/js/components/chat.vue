@@ -1,7 +1,7 @@
 <template>
-    <div>
+  <div>
         <textarea v-model="comment" cols="95" rows="4"></textarea>
-        <button v-on:click="sendComment"> 댓글 쓰기</button>
+        <button v-on:click="sendComment"> 전송 </button>
         <br>
         <p>{{ comment }}</p>
         <p v-for="com in comments" :key="com">{{com}}</p>
@@ -17,20 +17,31 @@ export default {
         return {
             comment:'',
             comments:[],
+            post_id:''
         }
-    },
-    mounted(){
+    },mounted(){
+        var location = window.location.pathname
+        var locationcut =location.split('/');
+        this.post_id=locationcut[3];
+        axios.post('/posts/check/'+this.post_id,{
+
+        }).then(res=>{
+            res.array.forEach(element => {
+                element->comment
+            });
+        })
     },
     methods:{
         sendComment(){
             console.log("Push Btn")
             if(this.comment){
                 axios.post('/posts/chats',{
-                    comment:this.comment
+                    comment:this.comment,
+                    post_id:this.post_id
                 })
                 .then(res => {
-                    console.log("Then.res")
-                    this.comments.push(this.comment);
+                    console.log("Then.res");
+                    console.log(res);
                 })
             }
         }

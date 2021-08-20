@@ -1,6 +1,8 @@
 {
     "private": true,
     "scripts": {
+        "landing": "cross-env NODE_ENV=development webpack --config webpack.config.landing --watch",
+        "landing:build": "cross-env NODE_ENV=production webpack --config webpack.config.landing",
         "dev": "npm run development",
         "development": "mix",
         "watch": "mix watch",

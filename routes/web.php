@@ -37,6 +37,8 @@ Route::get('/posts/myindex',[PostsController::class,'myindex'])->name('posts.myi
 Route::get('/posts/{id}',[PostsController::class,'edit'])->name('post.edit');
 Route::put('/posts/{id}',[PostsController::class,'update'])->name('post.update');
 Route::delete('/posts/{id}',[PostsController::class,'destroy'])->name('post.delete');
+// Route::post('/posts/chats',[PostsController::class,'chatstore']);
+Route::post('/posts/check/{post_id}',[ChatsController::class,'comment'])->name('chat.comment');
 Route::post('/posts/chats',[ChatsController::class,'store'])->name('chat.store');
 Route::post('/posts/store',[PostsController::class,'store'])->name('posts.store');
 Route::get('/chart/index',[ChartController::class,'index'])->name('chart.index');
