@@ -63,8 +63,6 @@
         </div>
 
         <p>댓글</p>
-
-
         <div id="app">
         </div>
 

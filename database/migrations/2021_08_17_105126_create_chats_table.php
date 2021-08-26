@@ -26,6 +26,10 @@ class CreateChatsTable extends Migration
             $table->string('comment');
             $table->timestamps();
         });
+
+        Schema::table('chats', function (Blueprint $table) {
+            $table->string('user_name');
+        });
     }
 
     /**
