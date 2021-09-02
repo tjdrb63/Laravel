@@ -62,12 +62,10 @@
                 @endcan
         </div>
 
-        <p>댓글</p>
+        <p>- 댓글 -</p>
         <div id="app">
+            <script src="{{ asset('js/app.js') }}"></script>
         </div>
-
-    <script src="{{ asset('js/app.js') }}"></script>
-
 </body>
 
 </html>

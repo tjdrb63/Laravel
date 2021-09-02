@@ -1858,6 +1858,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'chat',
@@ -2242,50 +2246,61 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.comment,
-            expression: "comment"
-          }
-        ],
-        attrs: { cols: "95", rows: "4" },
-        domProps: { value: _vm.comment },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.comment = $event.target.value
-          }
+  return _c("div", [
+    _c("textarea", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.comment,
+          expression: "comment"
         }
-      }),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.sendComment } }, [_vm._v(" 전송 ")]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
+      ],
+      staticClass: "form-control",
+      attrs: { cols: "100", rows: "4" },
+      domProps: { value: _vm.comment },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.comment = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-outline-primary ",
+        on: { click: _vm.sendComment }
+      },
+      [_vm._v(" 전송 ")]
+    ),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c(
+      "ul",
+      { staticClass: "list-group" },
       _vm._l(_vm.comments.id.length, function(c) {
         return _c("div", { key: c }, [
-          _vm._v(
-            "\n          " +
+          _c("li", { staticClass: "list-group-item" }, [
+            _vm._v(
               _vm._s(
                 _vm.comments.user_name[c - 1] +
                   " : " +
                   _vm.comments.comment[c - 1]
-              ) +
-              "\n      "
-          )
+              )
+            )
+          ])
         ])
-      })
-    ],
-    2
-  )
+      }),
+      0
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

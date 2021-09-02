@@ -1,11 +1,15 @@
 <template>
   <div>
-        <textarea v-model="comment" cols="95" rows="4"></textarea>
-        <button v-on:click="sendComment"> 전송 </button>
+        <textarea class="form-control" v-model="comment" cols="100" rows="4"></textarea>
+        <button class="btn btn-outline-primary " v-on:click="sendComment"> 전송 </button>
         <br>
-        <div v-for="c in comments.id.length" :key='c'>
-            {{comments.user_name[c-1]+" : " + comments.comment[c-1] }}
-        </div>
+        <br>
+        <ul class="list-group">
+            <div v-for="c in comments.id.length" :key='c'>
+                <li class="list-group-item">{{comments.user_name[c-1]+" : " + comments.comment[c-1] }}</li>
+            </div>
+
+        </ul>
     </div>
 </template>
 
